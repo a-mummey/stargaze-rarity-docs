@@ -48,6 +48,21 @@ paths:
     parameters:
       - $ref: "#/components/parameters/ContractId"
 
+  /contracts/refresh:    
+    put:
+        summary: Manually refresh contracts that are still minting        
+        security:
+          - basicAuth: []
+        responses:
+          "200": # status code
+            description: A list of contracts that will be refreshed
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/LimitedContract"
+    parameters:
+      - $ref: "#/components/parameters/ContractId"
+
   /contracts/{contractId}/rarities:
     get:
       summary: Returns a paginated list of rarity information for each NFT in the contract (sorted by rank ASC)
@@ -95,6 +110,11 @@ components:
           format: "date-time"        
         count:
           type: integer
+        minted:
+          type: integer
+        lastRefreshed:
+          type: string
+          format: "date-time"
     Contract:
       type: object
       properties:
@@ -109,6 +129,11 @@ components:
             $ref: "#/components/schemas/Trait"
         count:
           type: integer
+        minted:
+          type: integer
+        lastRefreshed:
+          type: string
+          format: "date-time"  
     ContractId:
       type: string
       minLength: 64
