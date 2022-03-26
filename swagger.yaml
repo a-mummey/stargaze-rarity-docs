@@ -181,7 +181,9 @@ components:
           $ref: "#/components/schemas/Score"
         traits:
           $ref: "#/components/schemas/Traits"
-        total:
+        count:
+          type: integer
+        minted:
           type: integer
 
   parameters:
